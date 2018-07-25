@@ -95,15 +95,59 @@ The `doPair` method will perform the pairing process. If the authentication is s
 TODO
 
 ### Getting and setting device's time
-TODO
+```
+    private void getDeviceTime() {
+        this.miBand.getCurrentTime(new ActionCallback() {
+            @Override
+            public void onSuccess(Object data){
+                Date deviceTime = (Date) data;
+                // TODO Do something with the deviceTime
+            }
+            @Override
+            public void onFail(int errorCode, String msg){
+                // TODO Handle failure when retrieving the device's time
+            }
+        });
+    }
+```
+```
+    private void setDeviceTime(GregorianCalendar newTime) {
+        this.miBand.setTime(newTime, new ActionCallback() {
+            @Override
+            public void onSuccess(Object data){
+                // TODO Do something
+            }
+            @Override
+            public void onFail(int errorCode, String msg){
+                // TODO Do something upon failure
+            }
+        });
+    }
+```
 
 ### Getting and setting user's profile on the device
-TODO
+```
+        UserInfo userInfo = new UserInfo(userIdInteger, UserInfo.GENDER_FEMALE, age, heightCm, weightKg, userAlias, 1);
+```
+```
+private void setUserData(UserInfo userInfo) {
+        this.miBand.setUserInfo(userInfo, new ActionCallback() {
+            @Override
+            public void onSuccess(Object data){
+                // TODO Handle when successful
+            }
+            @Override
+            public void onFail(int errorCode, String msg){
+                // TODO Handle when failure
+            }
+        });
+    }
+```
 
 ### Download steps data from the device
 To retrieve steps data from the device, your app must define a listener then pass that listener to the `fetchActivityData`. This API will make a fitness data request to the MI Band 2 device. Once the request is completed, this API will pass the results to the listener.
 
-The `downloadStepsData` method below shows how this can be done inside your app. First we define a `FetchActivityListener` that will take care of the data once this library has collected all of the data. The `OnFetchComplete` method will receive the starting date (`startDate`) and a list of steps count (`stepsByMinutes`). This list of steps contains minute-by-minute steps data starting from `startDate` to the last data available on the MI Band 2 device. After this listener is defined, the method pass the start date and the listener to the `fetchActivityData` method.
+The `downloadStepsData` method below shows how this can be done inside your app. First we define a `FetchActivityListener` that will take care of the data once this API has completed the request. The `OnFetchComplete` method will receive the starting date (`startDate`) and a list of steps count (`stepsByMinutes`). This list of steps contains minute-by-minute steps data starting from `startDate` to the last data available on the MI Band 2 device. After this listener is defined, the method pass the start date and the listener to the `fetchActivityData` method.
 ```
     private void downloadStepsData(GregorianCalendar fromStartDate) {
         FetchActivityListener fetchActivityListener = new FetchActivityListener() {
