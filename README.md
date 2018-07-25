@@ -1,4 +1,4 @@
-# Welness and Fitness Trackes API
+# Wellness and Fitness Trackers API
 An unofficial library to communicate with health and fitness trackers. Currently this library supports MI Band 2.
 
 ## Acknowledgments
