@@ -8,7 +8,7 @@ This library were adapted from the following projects:
 
 ## Examples
 ### Connecting to a MI Band 2 device
-First, define a `DeviceProfile` to help discovering the MiBand device you want to work with.
+First, define a `DeviceProfile` to help the Bluetooth scanner find the MI Band 2 device.
 ```
 DeviceProfile profile = new DeviceProfile("B8:F4:EF:2B:31:FA");
 ```
@@ -25,7 +25,7 @@ final ScanCallback scanCallback = new ScanCallback(){
         }
     };
 ```
-Finally, define the method to connect to the MI Band device that was found by the `ScanCallback`.
+Finally, define the method to connect to the device that was found by the `ScanCallback`.
 ```
 private void connectToMiBand(BluetoothDevice device) {
         this.miBand.connect(device, new ActionCallback() {
