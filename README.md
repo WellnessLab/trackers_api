@@ -12,7 +12,7 @@ First, define a `DeviceProfile` to help discovering the MiBand device you want t
 ```
 DeviceProfile profile = new DeviceProfile("B8:F4:EF:2B:31:FA");
 ```
-Then define a `ScanCallback` that will handle the device when the Bluetooth scanner found it.
+Then, define a `ScanCallback` that will take care the device when the Bluetooth scanner found it.
 ```
 final ScanCallback scanCallback = new ScanCallback(){
         @Override
@@ -25,7 +25,7 @@ final ScanCallback scanCallback = new ScanCallback(){
         }
     };
 ```
-Finally, define the method to handle the MI Band device that was found by the `ScanCallback`.
+Finally, define the method to connect to the MI Band device that was found by the `ScanCallback`.
 ```
 private void connectToMiBand(BluetoothDevice device) {
         this.miBand.connect(device, new ActionCallback() {
