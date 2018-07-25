@@ -8,9 +8,10 @@ This library were adapted from the following projects:
 
 ## Examples
 ### Connecting to a MI Band 2 device
-First, define a `DeviceProfile` to help the Bluetooth scanner find the MI Band 2 device.
+First, define a `DeviceProfile` object and a `MiBand` variable to help the Bluetooth scanner find the MI Band 2 device.
 ```
 DeviceProfile profile = new DeviceProfile("B8:F4:EF:2B:31:FA");
+MiBand miBand;
 ```
 Then, define a `ScanCallback` that will take care the device when the Bluetooth scanner found it.
 ```
