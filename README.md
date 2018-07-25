@@ -92,7 +92,21 @@ The `doPair` method will perform the pairing process. If the authentication is s
 ```
 
 ### Getting device's battery information
-TODO
+```
+    private void getBatteryInfo() {
+        this.miBand.getBatteryInfo(new ActionCallback() {
+            @Override
+            public void onSuccess(Object data){
+                BatteryInfo info = (BatteryInfo) data;
+                Log.d("SWELL", "Battery: " + info.toString());
+            }
+            @Override
+            public void onFail(int errorCode, String msg){
+                Log.d("SWELL" , "Battery info failed: " + msg);
+            }
+        });
+    }
+```
 
 ### Getting and setting device's time
 ```
