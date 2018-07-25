@@ -161,7 +161,7 @@ private void setUserData(UserInfo userInfo) {
 ```
 
 ### Download steps data from the device
-To retrieve steps data from the device, your app must define a listener then pass that listener to the `fetchActivityData`. This API will make a fitness data request to the MI Band 2 device. Once the request is completed, this API will pass the results to the listener.
+To retrieve steps data from the device, your app must define a listener. Then pass that listener to the `fetchActivityData` method. This API will make a fitness data request to the MI Band 2 device. Once the request is completed, this API will pass the results to the listener.
 
 The `downloadStepsData` method below shows how this can be done inside your app. First we define a `FetchActivityListener` that will take care of the data once this API has completed the request. The `OnFetchComplete` method will receive the starting date (`startDate`) and a list of steps count (`stepsByMinutes`). This list of steps contains minute-by-minute steps data starting from `startDate` to the last data available on the MI Band 2 device. After this listener is defined, the method pass the start date and the listener to the `fetchActivityData` method.
 ```
