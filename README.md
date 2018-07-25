@@ -141,7 +141,8 @@ The `doPair` method will perform the pairing process. If the authentication is s
 
 ### Getting and setting user's profile on the device
 ```
-        UserInfo userInfo = new UserInfo(userIdInteger, UserInfo.GENDER_FEMALE, age, heightCm, weightKg, userAlias, 1);
+        UserInfo userInfo = new UserInfo(userIdInteger, UserInfo.BIOLOGICAL_SEX_MALE, 
+                                         age, heightCm, weightKg, userAlias, 1);
 ```
 ```
 private void setUserData(UserInfo userInfo) {
