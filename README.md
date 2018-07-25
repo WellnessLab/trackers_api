@@ -1,5 +1,6 @@
 # Wellness and Fitness Trackers API
-An unofficial library to communicate with health and fitness trackers. Currently this library supports MI Band 2.
+An unofficial library to communicate with health and fitness trackers. Currently, this library supports MI Band 2. For questions, contact [Herman Saksono](http://www.ccs.neu.edu/~hsaksono/).
+
 
 ## Acknowledgments
 This library is an adaptation of the following projects:
