@@ -2,7 +2,7 @@
 An unofficial library to communicate with health and fitness trackers. Currently this library supports MI Band 2.
 
 ## Acknowledgments
-This library were adapted from the following projects:
+This library is an adaptation of the following projects:
 * [Pangliang](https://github.com/pangliang/miband-sdk-android), a library for the first MI Band.
 * [FreeYourGadget](https://github.com/Freeyourgadget/Gadgetbridge), an app to monitor your fitness data without using the app from the manufacturer.
 
