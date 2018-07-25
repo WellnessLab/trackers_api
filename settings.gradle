@@ -1,1 +1,1 @@
-include ':TrackersAPIExample'
+include ':TrackersAPI', ':TrackersAPIExample'
