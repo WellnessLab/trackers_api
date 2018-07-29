@@ -36,29 +36,29 @@ private void getConnectionToDevice(BluetoothDevice device) {
         return MiBand.newConnectionInstance(device, context, new ActionCallback() {
 			@Override 
 			public void onSuccess(Object data) { 
-				// Connected! TODO Do auth (if necessary) and pairing
+				// Connected! TO DO auth (if necessary) and pairing
 			}
 			
 			@Override 
 			public void onFail(int errorCode, String msg) { 
 				// TODO Handle failure 
-			} 
-		}
-    }
+			}
+		});
+	}
 ```
 #### Authenticating and pairing your Android device with the MI Band 2 device
 Before your app can communicate with the Mi Band 2, your app must (1) authenticate, then (2) pair your Android device with the MI Band 2. Your app only need to do step 1 once, but your app need to do step 2 every time you connect to the MI Band 2.
 
-You can call `doAuthAndPair` method after your app is connected to the MI Band 2 device. If the MI Band 2 device has not been bonded, this method will call `doAuth`. Otherwise this will proceed with pairing by calling `doPair`.
+In this example below, the `doAuthAndPair` method should be called after your app is connected to the MI Band 2 device. If the MI Band 2 device has not been bonded, this method should call the `auth` methog. Otherwise it should proceed with pairing by calling `pair`.
 ```
-    private void doAuthAndPair() {
-        boolean isPaired = miBand.getDevice().getBondState() != BluetoothDevice.BOND_NONE;
-        if (isPaired == false) {
-            this.doAuth();
-        } else {
-            this.doPair();
-        }
+private void doAuthAndPair() {
+    boolean isPaired = miBand.getDevice().getBondState() != BluetoothDevice.BOND_NONE;
+    if (isPaired == false) {
+        // TO DO Do authentication, then pairing.
+    } else {
+        // TO DO Do pairing only
     }
+}
 ```
 The `auth` method will perform the authentication process. If the authentication is successful, the `ActionCallback` will proceed with the pairing process by calling the `pair` method. Otherwise, this method needs to handle this failure.
 ```
@@ -154,17 +154,15 @@ this.miBand.doOneVibration();
 #### Download steps data from the device
 To retrieve steps data from the device, your app must define a listener. Then pass that listener to the `fetchActivityData` method. This API will make a fitness data request to the MI Band 2 device. Once the request is completed, this API will pass the results to the listener.
 
-The `downloadStepsData` method below shows how this can be done inside your app. First we define a `FetchActivityListener` that will take care of the data once this API has completed the request. The `OnFetchComplete` method will receive the starting date (`startDate`) and a list of steps count (`stepsByMinutes`). This list of steps contains minute-by-minute steps data starting from `startDate` to the last data available on the MI Band 2 device. After this listener is defined, the method pass the start date and the listener to the `fetchActivityData` method.
+The steps below shows how this can be done inside your app. First we define a `FetchActivityListener` that will take care of the data once this API has completed the request. The `OnFetchComplete` method will receive the starting date (`startDate`) and a list of steps count (`stepsByMinutes`). This list of steps contains minute-by-minute steps data starting from `startDate` to the last data available on the MI Band 2 device. After this listener is defined, the method pass the start date and the listener to the `fetchActivityData` method.
 ```
-    private void downloadStepsData(GregorianCalendar fromStartDate) {
-        FetchActivityListener fetchActivityListener = new FetchActivityListener() {
-            @Override
-            public void OnFetchComplete(Calendar startDate, List<Integer> stepsByMinutes) {
-                // TODO Process the minute-by-minute steps data from startDate
-            }
-        };
-        this.miBand.fetchActivityData(startDate, fetchActivityListener);
+FetchActivityListener fetchActivityListener = new FetchActivityListener() {
+    @Override
+    public void OnFetchComplete(Calendar startDate, List<Integer> stepsByMinutes) {
+        // TODO Process the minute-by-minute steps data from startDate
     }
+};
+this.miBand.fetchActivityData(startDate, fetchActivityListener);
 ```
 
 #### Getting real-time heartrate data from the device
