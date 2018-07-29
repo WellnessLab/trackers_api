@@ -36,7 +36,8 @@ private void getConnectionToDevice(BluetoothDevice device) {
         return MiBand.newConnectionInstance(device, context, new ActionCallback() {
 			@Override 
 			public void onSuccess(Object data) { 
-				// Connected! TO DO auth (if necessary) and pairing
+				// Connected! 
+				// TODO Perform auth (if necessary) and pairing (e.g., call doAuthAndPair())
 			}
 			
 			@Override 
@@ -146,7 +147,7 @@ this.miBand.setUserInfo(userInfo, new ActionCallback() {
     }
 });
 ```
-#### Sending vibration alert on the device
+#### Sending a vibration alert on the device
 ```
 this.miBand.doOneVibration();
 ```
