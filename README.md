@@ -32,20 +32,20 @@ final ScanCallback scanCallback = new ScanCallback() {
 ```
 Finally, define the method to connect to the device that was found by the `ScanCallback`.
 ```
-private void getConnectionToDevice(BluetoothDevice device) {
+private MiBand getConnectionToDevice(BluetoothDevice device) {
         return MiBand.newConnectionInstance(device, context, new ActionCallback() {
-			@Override 
-			public void onSuccess(Object data) { 
-				// Connected! 
-				// TODO Perform auth (if necessary) and pairing (e.g., call doAuthAndPair())
-			}
-			
-			@Override 
-			public void onFail(int errorCode, String msg) { 
-				// TODO Handle failure 
-			}
-		});
-	}
+		@Override 
+		public void onSuccess(Object data) { 
+			// Connected! 
+			// TODO Perform auth (if necessary) and pairing (e.g., call doAuthAndPair())
+		}
+		
+		@Override 
+		public void onFail(int errorCode, String msg) { 
+			// TODO Handle failure 
+		}
+	});
+}
 ```
 #### Authenticating and pairing your Android device with the MI Band 2 device
 Before your app can communicate with the Mi Band 2, your app must (1) authenticate, then (2) pair your Android device with the MI Band 2. Your app only need to do step 1 once, but your app need to do step 2 every time you connect to the MI Band 2.
