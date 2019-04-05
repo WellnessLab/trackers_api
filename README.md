@@ -17,7 +17,7 @@ First, define `MiBand2Scanner` object and a `MiBand` variable to help the Blueto
 MiBandScanner miBandScanner = new MiBandScanner();
 MiBand miBand;
 ```
-Then, define a `ScanCallback` that will take care the device when the Bluetooth scanner found it.
+Then, define a `ScanCallback` that will take care of the device when the Bluetooth scanner found it.
 ```java
 final ScanCallback scanCallback = new ScanCallback() { 
 	@Override 
