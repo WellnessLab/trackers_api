@@ -13,12 +13,12 @@ This material is based upon work supported by the National Science Foundation un
 ### Connecting, Authenticating, and Pairing
 #### Connecting to a MI Band 2 device
 First, define `MiBand2Scanner` object and a `MiBand` variable to help the Bluetooth scanner find the MI Band 2 device.
-```
+```java
 MiBandScanner miBandScanner = new MiBandScanner();
 MiBand miBand;
 ```
 Then, define a `ScanCallback` that will take care the device when the Bluetooth scanner found it.
-```
+```java
 final ScanCallback scanCallback = new ScanCallback() { 
 	@Override 
 	public void onScanResult(int callbackType, ScanResult result) {
@@ -31,7 +31,7 @@ final ScanCallback scanCallback = new ScanCallback() {
 
 ```
 Finally, define the method to connect to the device that was found by the `ScanCallback`.
-```
+```java
 private MiBand getConnectionToDevice(BluetoothDevice device) {
         return MiBand.newConnectionInstance(device, context, new ActionCallback() {
 		@Override 
@@ -51,7 +51,7 @@ private MiBand getConnectionToDevice(BluetoothDevice device) {
 Before your app can communicate with the Mi Band 2, your app must (1) authenticate, then (2) pair your Android device with the MI Band 2. Your app only need to do step 1 once, but your app need to do step 2 every time you connect to the MI Band 2.
 
 In this example below, the `doAuthAndPair` method should be called after your app is connected to the MI Band 2 device. If the MI Band 2 device has not been bonded, this method should call the `auth` methog. Otherwise it should proceed with pairing by calling `pair`.
-```
+```java
 private void doAuthAndPair() {
     boolean isPaired = miBand.getDevice().getBondState() != BluetoothDevice.BOND_NONE;
     if (isPaired == false) {
@@ -62,7 +62,7 @@ private void doAuthAndPair() {
 }
 ```
 The `auth` method will perform the authentication process. If the authentication is successful, the `ActionCallback` will proceed with the pairing process by calling the `pair` method. Otherwise, this method needs to handle this failure.
-```
+```java
 this.miBand.auth(new ActionCallback() {
     @Override
     public void onSuccess(Object data){
@@ -76,7 +76,7 @@ this.miBand.auth(new ActionCallback() {
 ```
 The `pair` method will perform the pairing process. If the authentication is successful, the `ActionCallback` will do other actions. Otherwise, this method needs to handle this failure.
 
-```
+```java
 this.miBand.pair(new ActionCallback() {
     @Override
     public void onSuccess(Object data){
@@ -90,7 +90,7 @@ this.miBand.pair(new ActionCallback() {
 ```
 ### Basic Operations
 #### Getting the device's battery information
-```
+```java
 this.miBand.getBatteryInfo(new BatteryInfoCallback() {
     @Override
     public void onSuccess(BatteryInfo info){
@@ -104,7 +104,7 @@ this.miBand.getBatteryInfo(new BatteryInfoCallback() {
 ```
 
 #### Getting and setting the device's time
-```
+```java
 this.miBand.getCurrentTime(new ActionCallback() {
     @Override
     public void onSuccess(Object data){
@@ -117,7 +117,7 @@ this.miBand.getCurrentTime(new ActionCallback() {
     }
 });
 ```
-```
+```java
 this.miBand.setTime(newTime, new ActionCallback() {
     @Override
     public void onSuccess(Object data){
@@ -131,11 +131,11 @@ this.miBand.setTime(newTime, new ActionCallback() {
 ```
 
 #### Getting and setting user's profile on the device
-```
+```java
 UserInfo userInfo = new UserInfo(userIdInteger, UserInfo.BIOLOGICAL_SEX_MALE, 
                                  age, heightCm, weightKg, userAlias, 1);
 ```
-```
+```java
 this.miBand.setUserInfo(userInfo, new ActionCallback() {
     @Override
     public void onSuccess(Object data){
@@ -148,7 +148,7 @@ this.miBand.setUserInfo(userInfo, new ActionCallback() {
 });
 ```
 #### Sending a vibration alert on the device
-```
+```java
 this.miBand.doOneVibration();
 ```
 ### Wellness and Fitness Operations
@@ -156,7 +156,7 @@ this.miBand.doOneVibration();
 To retrieve steps data from the device, your app must define a listener. Then pass that listener to the `fetchActivityData` method. This API will make a fitness data request to the MI Band 2 device. Once the request is completed, this API will pass the results to the listener.
 
 The steps below shows how this can be done inside your app. First we define a `FetchActivityListener` that will take care of the data once this API has completed the request. The `OnFetchComplete` method will receive the starting date (`startDate`) and a list of steps count (`stepsByMinutes`). This list of steps contains minute-by-minute steps data starting from `startDate` to the last data available on the MI Band 2 device. After this listener is defined, the method pass the start date and the listener to the `fetchActivityData` method.
-```
+```java
 FetchActivityListener fetchActivityListener = new FetchActivityListener() {
     @Override
     public void OnFetchComplete(Calendar startDate, List<Integer> stepsByMinutes) {
@@ -167,7 +167,7 @@ this.miBand.fetchActivityData(startDate, fetchActivityListener);
 ```
 
 #### Getting real-time heartrate data from the device
-```
+```java
 this.miBand.startRealtimeStepsNotification(new HeartRateNotifyListener() {
 	@Override 
 	public void onNotify(int heartRate) {
@@ -177,7 +177,7 @@ this.miBand.startRealtimeStepsNotification(new HeartRateNotifyListener() {
 ```
 
 #### Getting real-time steps data from the device
-```
+```java
 this.miBand.startRealtimeStepsNotification(new RealtimeStepsNotifyListener() {
     @Override
     public void onNotify(int steps){
